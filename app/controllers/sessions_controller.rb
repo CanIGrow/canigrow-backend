@@ -1,8 +1,11 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authentication
 
+  def new
+  end
+
   def create
-    user = User.find_by(name: params[:name])
+    user = User.find_by_email(email: params[:email])
 
     if user && user.authenticate(params[:password])
       render json: { token: user.api_token }

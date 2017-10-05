@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
-  protect_from_forgery with: :exception
-  
+
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   private
@@ -23,12 +22,4 @@ class ApplicationController < ActionController::API
     def current_user
       @user
     end
-
-  # def verify_authentication
-  #   render json: { error: "Restricted" }, status: :unauthorized
-  # end
-  #
-  # unless user
-  #     render json: { error: "Restricted" }, status: :unauthorized
-  # end
 end

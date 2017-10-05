@@ -1,11 +1,14 @@
 class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_password
-  validates_uniqueness_of :email
-  validates_uniqueness_of :usernam e
 
   before_validation :downcase_email
   before_validation :downcase_username
+
+  validates :email, uniqueness: true, format: {/\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
+  
+  validates_uniqueness_of :username
+
 
   private
 

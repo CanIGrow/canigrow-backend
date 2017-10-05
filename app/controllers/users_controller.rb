@@ -29,7 +29,7 @@ class UsersController < ApplicationController
           "error": "There is no user with that username and password."
         }
       else
-        render json: {token: user.api_token, user_id: user.id}
+        render json: {user_id: user.id, token: user.api_token}
       end
     end
 

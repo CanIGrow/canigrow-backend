@@ -4,4 +4,6 @@ json.user do
   json.email @user.email
   json.location @user.location
   json.bio @user.bio
+  json.token @user.api_token
+  json.href user_url(@user)
 end

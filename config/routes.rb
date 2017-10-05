@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :session, only: :create
+  # resource :session, only: :create
   resources :users do
     collection do
       post :login

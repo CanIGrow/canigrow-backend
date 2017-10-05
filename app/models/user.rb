@@ -5,8 +5,10 @@ class User < ApplicationRecord
   before_validation :downcase_email
   before_validation :downcase_username
 
-  validates :email, uniqueness: true, format: {/\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
-  
+  validates :email,
+    uniqueness: true,
+    format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }
+
   validates_uniqueness_of :username
 
 

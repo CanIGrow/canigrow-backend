@@ -18,3 +18,9 @@
 #     coat_color:   COLORS.sample
 #   )
 # end
+
+require 'csv'
+
+CSV.foreach('lib/landscapeplants_streamlined.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+  Plant.create!(row.to_hash)
+end

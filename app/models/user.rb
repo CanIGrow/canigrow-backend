@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :plots
+  has_many :plants, through: :plots
   has_secure_token :api_token
   has_secure_password
 

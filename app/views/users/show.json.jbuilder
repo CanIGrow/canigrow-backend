@@ -2,6 +2,12 @@ json.user do
   json.id @user.id
   json.username @user.username
   json.bio @user.bio
+  json.plots @user.plots do |plot|
+    json.plot plot.name
+      json.plants plot.plants do |plant|
+      json.plant plant.common_name
+    end
+  end
   json.href user_url(@user)
 
 #   json.questions @user.questions do |question|

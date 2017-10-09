@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :plants
     resources :users do
+      resources :plots
       collection do
         post :login
       end

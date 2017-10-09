@@ -10,6 +10,12 @@ class PlantsController < ApplicationController
     render :show
   end
 
+  def favorite
+    @plant = Plant.find(params[:plant_id])
+    @user = User.find(1)
+    @user.plots.first.plants << @plant
+  end
+
   # PATCH/PUT /plants/1
   def update
     if @plant.update(plant_params)

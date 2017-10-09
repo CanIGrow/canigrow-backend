@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   scope '/api' do
-    resources :plants
+    resources :plants do
+      post :favorite
+    end
     resources :users do
       resources :plots
       collection do

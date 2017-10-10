@@ -5,5 +5,6 @@ json.user do
   json.location @user.location
   json.bio @user.bio
   json.token @user.api_token
+  json.plots @user.plots
   json.href user_url(@user)
 end

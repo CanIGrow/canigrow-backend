@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
 
     def authenticate_token
       authenticate_with_http_token do |token, options|
-        @user = User.find_by(token: token)
+        @user = User.find_by(api_token: token)
       end
     end
 

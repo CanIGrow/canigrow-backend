@@ -1,5 +1,7 @@
 class PlotsController < ApplicationController
-  before_action :get_user, except: %i[destroy]
+  # before_action :get_user
+  before_action :authenticate, only: [:create]
+  before_action :current_user, only: [:create]
 
   def create
     @plot = Plot.new(plot_params)

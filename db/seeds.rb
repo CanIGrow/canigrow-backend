@@ -21,13 +21,9 @@
 
 require 'csv'
 
-# CSV.foreach('lib/landscapeplants_streamlined.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
-#   Plant.create!(row.to_hash)
-# end
-#
-# CSV.foreach('lib/phm_us_zipcode.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
-#   Zone.create!(row.to_hash)
-# end
+CSV.foreach('lib/landscapeplants_streamlined.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+  Plant.create!(row.to_hash)
+end
 
 CSV.foreach('lib/users.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
   User.create!(row.to_hash)

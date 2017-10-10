@@ -16,7 +16,9 @@ class PlantsController < ApplicationController
 
   def favorite
     @plant = Plant.find(params[:plant_id])
-    @current_user.plots.first.plants << @plant
+    @plot = Plot.find_by(id: params[:id]) || @current_user.plots.first
+    @plot.plants << @plant
+    render 'users/show'
   end
 
   # PATCH/PUT /plants/1

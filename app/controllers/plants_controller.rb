@@ -23,23 +23,27 @@ class PlantsController < ApplicationController
       @plot.user_id = @current_user.id
       @plot.save!
     end
-    @plot.plants << @plant
-    render 'users/show'
-  end
-
-  # PATCH/PUT /plants/1
-  def update
-    if @plant.update(plant_params)
-      render json: @plant
+    if @plot.user_id == @current_user.id
+      @plot.plants << @plant
+      render 'users/show'
     else
-      render json: @plant.errors, status: :unprocessable_entity
+      render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end
   end
 
-  # DELETE /plants/1
-  def destroy
-      @plant.destroy
-  end
+  # PATCH/PUT /plants/1
+  # def update
+  #   if @plant.update(plant_params)
+  #     render json: @plant
+  #   else
+  #     render json: @plant.errors, status: :unprocessable_entity
+  #   end
+  # end
+  #
+  # # DELETE /plants/1
+  # def destroy
+  #     @plant.destroy
+  # end
 
   private
     def plant_params

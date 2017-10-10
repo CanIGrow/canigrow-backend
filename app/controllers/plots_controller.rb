@@ -1,8 +1,8 @@
 class PlotsController < ApplicationController
-  before_action :authenticate, only: [:create, :destroy]
-  before_action :current_user, only: [:create, :destroy]
+  before_action :authenticate, only: [:create, :destroy, :update]
+  before_action :current_user, only: [:create, :destroy, :update]
   before_action :set_plot, except: [:create, :index]
-  before_action :get_user, only: [:index]
+  before_action :get_user, only: [:index, :update]
 
   def index
     render :index
@@ -26,6 +26,15 @@ class PlotsController < ApplicationController
       name = @plot.name
       @plot.destroy
       render json: {message: "You have deleted a plot", plot_id: id, plot_name: name}
+    else
+      render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
+    end
+  end
+
+  def update
+    if @plot.user_id == @current_user.id
+       @plot.update(plot_params)
+       render 'users/show'
     else
       render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end

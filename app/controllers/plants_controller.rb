@@ -1,4 +1,7 @@
 class PlantsController < ApplicationController
+  before_action :authenticate, only: [:update, :favorite, :destroy]
+  before_action :current_user, only: [:favorite, :update, :destroy]
+
   def index
     @plants = Plant.all
     render :index
@@ -12,8 +15,7 @@ class PlantsController < ApplicationController
 
   def favorite
     @plant = Plant.find(params[:plant_id])
-    @user = User.find(1)
-    @user.plots.first.plants << @plant
+    @current_user.plots.first.plants << @plant
   end
 
   # PATCH/PUT /plants/1
@@ -32,7 +34,7 @@ class PlantsController < ApplicationController
 
   private
     # Only allow a trusted parameter "white list" through.
-    def question_params
+    def plant_params
       params.require(:plant).permit(:umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes)
     end
 

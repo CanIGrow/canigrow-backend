@@ -13,6 +13,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @plot = Plot.new(:name => "My First Plot")
+    @plant = Plant.limit(1).order("RANDOM()")
+    @plot.plants << @plant
     @user.plots << @plot
     if @user.save
       render status: :created

@@ -9,10 +9,5 @@ Rails.application.routes.draw do
         post :login
       end
     end
-    resources :zones do
-      collection do
-        post :get_zone
-      end
-    end
   end
 end

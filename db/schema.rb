@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010163150) do
+ActiveRecord::Schema.define(version: 20171010201351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171010163150) do
     t.bigint "plot_id", null: false
     t.bigint "plant_id", null: false
     t.index ["plant_id", "plot_id"], name: "index_plants_plots_on_plant_id_and_plot_id"
-    t.index ["plot_id", "plant_id"], name: "index_plants_plots_on_plot_id_and_plant_id"
+    t.index ["plot_id", "plant_id"], name: "index_plants_plots_on_plot_id_and_plant_id", unique: true
   end
 
   create_table "plots", force: :cascade do |t|

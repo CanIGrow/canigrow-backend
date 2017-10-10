@@ -1,6 +1,7 @@
 class PlantsController < ApplicationController
   before_action :authenticate, only: [:update, :favorite, :destroy]
   before_action :current_user, only: [:favorite, :update, :destroy]
+  before_action :has_plot, only: [:favorite]
 
   def index
     @plants = Plant.all
@@ -33,9 +34,15 @@ class PlantsController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
     def plant_params
       params.require(:plant).permit(:umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes)
+    end
+
+    def has_plot
+      if @current_user.plots.empty?
+        @plot = Plot.new(:name => "My First Plot")
+        @current_user.plots << @plot
+      end
     end
 
 end

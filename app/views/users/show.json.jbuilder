@@ -3,7 +3,8 @@ json.user do
   json.username @user.username
   json.bio @user.bio
   json.plots @user.plots do |plot|
-    json.plot plot.name
+    json.plot_name plot.name
+    json.plot_id plot.id
       json.plants plot.plants do |plant|
       json.plant plant.common_name
     end

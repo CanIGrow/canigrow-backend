@@ -16,7 +16,13 @@ class PlantsController < ApplicationController
 
   def favorite
     @plant = Plant.find(params[:plant_id])
-    @plot = Plot.find_by(id: params[:id]) || @current_user.plots.first
+    if params[:id]
+      @plot = Plot.find_by(id: params[:id])
+    else
+      @plot = Plot.new(plot_params)
+      @plot.user_id = @current_user.id
+      @plot.save!
+    end
     @plot.plants << @plant
     render 'users/show'
   end
@@ -38,6 +44,10 @@ class PlantsController < ApplicationController
   private
     def plant_params
       params.require(:plant).permit(:umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes)
+    end
+
+    def plot_params
+      params.permit(:plot, :name, :user_id)
     end
 
     def has_plot

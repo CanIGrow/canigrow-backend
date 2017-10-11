@@ -23,7 +23,9 @@ class PlantsController < ApplicationController
       @plot.user_id = @current_user.id
       @plot.save!
     end
-    if @plot.user_id == @current_user.id
+    if @plot.plants.exists?(@plant.id)
+      render json: {error: "This plant already belongs to this plot"}
+    elsif @plot.user_id == @current_user.id
       @plot.plants << @plant
       render 'users/show'
     else
@@ -59,6 +61,9 @@ class PlantsController < ApplicationController
         @plot = Plot.new(:name => "My First Plot")
         @current_user.plots << @plot
       end
+    end
+
+    def add_plant_to_plot
     end
 
 end

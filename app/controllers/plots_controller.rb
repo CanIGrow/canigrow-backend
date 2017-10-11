@@ -2,7 +2,7 @@ class PlotsController < ApplicationController
   before_action :authenticate, only: [:create, :destroy, :update]
   before_action :current_user, only: [:create, :destroy, :update]
   before_action :set_plot, except: [:create, :index]
-  before_action :get_user, only: [:index, :update]
+  before_action :get_user, only: [:index]
 
   def index
     render :index

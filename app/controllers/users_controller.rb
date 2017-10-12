@@ -22,9 +22,7 @@ class UsersController < ApplicationController
     if @user.save
       render status: :created
     else
-      render json: {
-        errors: @user.errors
-      }, status: :bad_request
+      render json: {errors: @user.errors}, status: :bad_request
     end
   end
 

@@ -48,7 +48,7 @@ class UsersController < ApplicationController
         "error": "There is no user with that username and password."
       }
     else
-      render json: {user_id: user.id, token: user.api_token}
+      render json: {user_id: user.id, username: user.username, token: user.api_token}
     end
   end
 

@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+ before_action :get_user, only: [:update, :destroy]
+ before_action :authenticate, only: [:update, :destroy]
+ before_action :current_user, only: [:update, :destroy]
 
   def index
     @users = User.all
@@ -25,6 +28,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.id == @current_user.id
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    else
+      render json: {errors: "unauthorized"}, status: :unauthorized
+    end
+  end
+
   def login
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
 
@@ -37,10 +52,14 @@ class UsersController < ApplicationController
     end
   end
 
-    private
+  private
 
-    def user_params
-      params.require(:user).permit(:username, :password, :bio, :location, :email)
-    end
+  def user_params
+    params.require(:user).permit(:username, :password, :bio, :location, :email)
+  end
+
+  def get_user
+    @user = User.find_by(username: params[:username])
+  end
 
 end

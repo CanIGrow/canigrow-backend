@@ -14,14 +14,12 @@ class PlotsController < ApplicationController
     if @plot.save
       render status: :created
     else
-      render json: {
-        errors: @plot.errors
-      }, status: :bad_request
+      render json: {errors: @plot.errors}, status: :bad_request
     end
   end
 
   def destroy
-    if @plot.user_id == @current_user.id
+    if current_user_owns_plot
       id = @plot.id
       name = @plot.name
       @plot.destroy
@@ -31,9 +29,32 @@ class PlotsController < ApplicationController
     end
   end
 
+# To move, copy, or delete a plant:
+
+  def update
+    if current_user_owns_plot
+      if params[:plant_id].present?
+        @plant = Plant.find(params[:plant_id])
+      end
+      if params[:new_plot].present?
+        @new_plot = Plot.find(params[:new_plot])
+        @new_plot.plants << @plant
+      end
+      unless params[:copy] == 'yes'
+        @plot.plants.delete(@plant)
+      end
+      if params[:name].present?
+        @plot.update(plot_params)
+      end
+      render 'users/show'
+    else
+      render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
+    end
+  end
+
   def rename
     @plot = Plot.find(params[:plot_id])
-    if @plot.user_id == @current_user.id
+    if current_user_owns_plot
        @plot.update(plot_params)
        render 'users/show'
     else
@@ -45,6 +66,14 @@ class PlotsController < ApplicationController
 
   def plot_params
     params.require(:plot).permit(:name, :user_id)
+  end
+
+  def current_user_owns_plot
+    if @plot.user_id == @current_user.id
+      return true
+    else
+      return false
+    end
   end
 
   def set_plot

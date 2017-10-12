@@ -6,6 +6,7 @@ json.user do
     json.plot_name plot.name
     json.plot_id plot.id
       json.plants plot.plants do |plant|
+      json.plant_id plant.id
       json.plant plant.common_name
     end
   end

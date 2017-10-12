@@ -8,7 +8,6 @@ class PlantsController < ApplicationController
     render :index
   end
 
-  # GET /plants/1
   def show
     @plant = Plant.find(params[:id])
     render :show
@@ -24,7 +23,7 @@ class PlantsController < ApplicationController
       @plot.save!
     end
     if @plot.plants.exists?(@plant.id)
-      render json: {error: "This plant already belongs to this plot"}
+      render json: {error: "That plant already belongs to that plot"}
     elsif @plot.user_id == @current_user.id
       @plot.plants << @plant
       render 'users/show'
@@ -32,20 +31,6 @@ class PlantsController < ApplicationController
       render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end
   end
-
-  # PATCH/PUT /plants/1
-  # def update
-  #   if @plant.update(plant_params)
-  #     render json: @plant
-  #   else
-  #     render json: @plant.errors, status: :unprocessable_entity
-  #   end
-  # end
-  #
-  # # DELETE /plants/1
-  # def destroy
-  #     @plant.destroy
-  # end
 
   private
     def plant_params
@@ -61,9 +46,6 @@ class PlantsController < ApplicationController
         @plot = Plot.new(:name => "My First Plot")
         @current_user.plots << @plot
       end
-    end
-
-    def add_plant_to_plot
     end
 
 end

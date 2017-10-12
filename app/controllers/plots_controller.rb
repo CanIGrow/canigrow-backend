@@ -20,10 +20,8 @@ class PlotsController < ApplicationController
 
   def destroy
     if current_user_owns_plot
-      id = @plot.id
-      name = @plot.name
       @plot.destroy
-      render json: {message: "You have deleted a plot", plot_id: id, plot_name: name}
+      render json: {message: "You have deleted a plot", plot_id: @plot.id, plot_name: @plot.name}
     else
       render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end
@@ -51,17 +49,7 @@ class PlotsController < ApplicationController
       render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end
   end
-
-  def rename
-    @plot = Plot.find(params[:plot_id])
-    if current_user_owns_plot
-       @plot.update(plot_params)
-       render 'users/show'
-    else
-      render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
-    end
-  end
-
+  
   private
 
   def plot_params

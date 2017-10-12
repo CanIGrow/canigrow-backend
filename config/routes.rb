@@ -3,13 +3,13 @@ Rails.application.routes.draw do
     resources :plants, only: [:index, :show] do
       post :favorite
     end
-    resources :users, only: [:create, :index, :show, :update, :destroy] do
+    resources :users, param: :username, only: [:show, :create, :index, :show, :update, :destroy] do
       collection do
         post :login
       end
     end
     resources :plots, only: [:create, :show, :update, :destroy] do
-      patch :rename 
+      patch :rename
     end
 
   end

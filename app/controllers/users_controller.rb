@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:username])
     render :show
   end
 
@@ -36,8 +36,6 @@ class UsersController < ApplicationController
       render json: {user_id: user.id, token: user.api_token}
     end
   end
-
-
 
     private
 

@@ -42,9 +42,7 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
 
     if !user
-      render status: :unauthorized, json: {
-        "error": "There is no user with that username and password."
-      }
+      render status: :unauthorized, json: {"error": "There is no user with that username and password."}
     else
       render json: {user_id: user.id, username: user.username, token: user.api_token}
     end

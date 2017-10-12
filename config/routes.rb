@@ -8,7 +8,10 @@ Rails.application.routes.draw do
         post :login
       end
     end
-    resources :plots, only: [:create, :show, :update, :destroy]
+    resources :plots, only: [:create, :show, :update, :destroy] do
+      patch :rename 
+    end
+
   end
 end
 

@@ -1,7 +1,7 @@
 class PlotsController < ApplicationController
-  before_action :authenticate, only: [:create, :destroy, :update]
-  before_action :current_user, only: [:create, :destroy, :update]
-  before_action :set_plot, except: [:create, :index]
+  before_action :authenticate, only: [:create, :destroy, :update, :rename]
+  before_action :current_user, only: [:create, :destroy, :update, :rename]
+  before_action :set_plot, except: [:create, :index, :rename]
   before_action :get_user, only: [:index]
 
   def index
@@ -31,7 +31,8 @@ class PlotsController < ApplicationController
     end
   end
 
-  def update
+  def rename
+    @plot = Plot.find(params[:plot_id])
     if @plot.user_id == @current_user.id
        @plot.update(plot_params)
        render 'users/show'

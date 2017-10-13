@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :plots, only: [:create, :show, :update, :destroy] do
       patch :rename
     end
+    resources :account_activations, only: [:edit]
 
   end
 end

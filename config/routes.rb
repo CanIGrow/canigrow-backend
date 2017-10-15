@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   scope '/api' do
     resources :plants, only: [:index, :show] do
       post :favorite

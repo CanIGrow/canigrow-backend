@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @plot.plants << @plant
     @user.plots << @plot
     if @user.save
-      UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_email
       render status: :created
     else
       render json: {errors: @user.errors}, status: :bad_request
@@ -41,8 +41,9 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
-
-    if !user
+    if user.activated? == false
+      render json: {message: "You have not yet activated your account. Check your email for the activation link." user_id: user.id, username: user.username, email: user.email}
+    elsif !user
       render status: :unauthorized, json: {"error": "There is no user with that username and password."}
     else
       render json: {user_id: user.id, username: user.username, token: user.api_token}

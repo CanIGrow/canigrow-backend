@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @plot.plants << @plant
     @user.plots << @plot
     if @user.save
+      UserMailer.account_activation(@user).deliver_now
       render status: :created
     else
       render json: {errors: @user.errors}, status: :bad_request

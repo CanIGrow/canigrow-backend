@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_password
 
-  attr_accessor: :activation_token
+  attr_accessor :activation_token
 
   before_validation :downcase_email
   before_validation :downcase_username
@@ -32,9 +32,15 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
 
   before_create :create_activation_digest
+  # before_create :db_seed
 
 
   private
+
+  # def db_seed
+  #   self.activated = true
+  #   self.activated_at = Time.zone.now
+  # end
 
   def downcase_email
     email.downcase if email
@@ -42,6 +48,16 @@ class User < ApplicationRecord
 
   def downcase_username
     username.downcase if username
+  end
+
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
   end
 
   def create_activation_digest

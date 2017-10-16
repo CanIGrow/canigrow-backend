@@ -1,7 +1,12 @@
 json.user do
   json.id @user.id
   json.username @user.username
+  json.email @user.email
+  json.location @user.location
+  json.location_private @user.location_private
   json.bio @user.bio
+  json.facebook @user.facebook
+  json.twitter @user.twitter
   json.plots @user.plots do |plot|
     json.plot_name plot.name
     json.plot_id plot.id

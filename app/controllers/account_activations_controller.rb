@@ -4,7 +4,7 @@ class AccountActivationsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       user.activate
-      render status: :created
+      render json: {message: "account activated"}, status: :created
       # flash[:success] = "Account activated!"
       # redirect_to user
     else

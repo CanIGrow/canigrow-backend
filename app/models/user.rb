@@ -17,6 +17,7 @@
 class User < ApplicationRecord
   has_many :plots, dependent: :destroy
   has_many :plants, through: :plots
+  has_many :comments, dependent: :destroy
   has_secure_token :api_token
   has_secure_password
 

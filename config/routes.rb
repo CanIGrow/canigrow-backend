@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   scope '/api' do
     resources :plants, only: [:index, :show] do
       post :favorite
@@ -11,7 +16,7 @@ Rails.application.routes.draw do
     resources :plots, only: [:create, :show, :update, :destroy] do
       patch :rename
     end
-    resources :account_activations, only: [:edit]
+
 
   end
 end

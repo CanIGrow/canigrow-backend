@@ -14,5 +14,13 @@ json.plant do
   json.zone @plant.zone
   json.soil @plant.soil
   json.notes @plant.notes
+  json.comments @plant.comments do |comment|
+  json.user comment.user.username
+
+  json.comment_id comment.id
+  json.user_id comment.user_id
+  json.body comment.body
+  json.datetime comment.datetime
+  end
   json.href plant_url(@plant)
 end

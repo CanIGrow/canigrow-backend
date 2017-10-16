@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :plants, only: [:index, :show] do
       post :favorite
+      resources :comments, only: [:create, :destroy]
     end
     resources :users, param: :username, only: [:show, :create, :index, :show, :update, :destroy] do
       collection do

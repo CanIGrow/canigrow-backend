@@ -15,6 +15,12 @@ json.user do
       json.plant plant.common_name
     end
   end
+  json.comments @user.comments do |comment|
+    json.comment_id comment.id
+    json.plant_id comment.plant_id
+    json.body comment.body
+    json.datetime comment.datetime
+  end
   json.href user_url(@user)
 
 #   json.questions @user.questions do |question|

@@ -32,7 +32,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
 
   before_create :create_activation_digest
-  before_create :db_seed
+  # before_create :db_seed
 
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
@@ -70,10 +70,10 @@ class User < ApplicationRecord
 
   private
 
-  def db_seed
-    self.activated = true
-    self.activated_at = Time.zone.now
-  end
+  # def db_seed
+  #   self.activated = true
+  #   self.activated_at = Time.zone.now
+  # end
 
   def downcase_email
     email.downcase if email

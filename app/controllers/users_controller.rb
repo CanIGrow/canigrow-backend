@@ -41,10 +41,10 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
-    if user.activated? == false
-      render json: {message: "You have not yet activated your account. Check your email for the activation link.", user_id: user.id, username: user.username, email: user.email}
-    elsif !user
+    if !user
       render status: :unauthorized, json: {"error": "There is no user with that username and password."}
+    elsif user.activated? == false
+      render json: {message: "You have not yet activated your account. Check your email for the activation link.", user_id: user.id, username: user.username, email: user.email}
     else
       render json: {user_id: user.id, username: user.username, token: user.api_token}
     end

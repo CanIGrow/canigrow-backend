@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/edit'
+  post 'account_activations/activate'
   resources :account_activations, only: [:edit, :create]
   resources :password_resets, only: [:new, :create, :edit, :update]
 

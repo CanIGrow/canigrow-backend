@@ -16,7 +16,7 @@ json.plant do
   json.notes @plant.notes
   json.comments @plant.comments do |comment|
   json.user comment.user.username
-
+  json.user_href user_url(comment.user)
   json.comment_id comment.id
   json.user_id comment.user_id
   json.body comment.body

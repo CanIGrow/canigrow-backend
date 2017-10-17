@@ -8,6 +8,7 @@ class UserMailer < ApplicationMailer
 
   def account_activation(user)
     @user = user
+    @frontend_path = "https://canigrow.github.io/canigrow-frontend/"
     mail to: user.email, subject: "Account activation"
   end
 

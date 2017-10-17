@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  root to: "home#index"
+
   get 'password_resets/new'
   get 'password_resets/edit'
   post 'account_activations/activate'

@@ -1,4 +1,4 @@
-class PlantsController < ApplicationController
+class PlantsController < ApiController
   before_action :authenticate, only: [:update, :favorite, :destroy]
   before_action :current_user, only: [:favorite, :update, :destroy]
   before_action :has_plot, only: [:favorite]

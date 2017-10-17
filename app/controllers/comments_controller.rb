@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < ApiController
   before_action :authenticate, only: [:create]
   before_action :current_user, only: [:create]
 

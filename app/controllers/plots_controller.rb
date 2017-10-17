@@ -1,4 +1,4 @@
-class PlotsController < ApplicationController
+class PlotsController < ApiController
   before_action :authenticate, only: [:create, :destroy, :update, :rename]
   before_action :current_user, only: [:create, :destroy, :update, :rename]
   before_action :set_plot, except: [:create, :index, :rename]
@@ -49,7 +49,7 @@ class PlotsController < ApplicationController
       render json: {error: "You're not authorized to complete this action"}, status: :unauthorized
     end
   end
-  
+
   private
 
   def plot_params

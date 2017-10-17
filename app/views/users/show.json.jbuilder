@@ -18,6 +18,8 @@ json.user do
   json.comments @user.comments do |comment|
     json.comment_id comment.id
     json.plant_id comment.plant_id
+    json.plant comment.plant.common_name
+    json.plant_href plant_url(comment.plant)
     json.body comment.body
     json.datetime comment.datetime
   end

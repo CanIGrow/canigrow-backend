@@ -14,13 +14,15 @@ class AccountActivationsController < ApplicationController
   end
 
 
-  def edit
+  def activate
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       user.activate
       render json: {message: "account activated"}, status: :created
       # flash[:success] = "Account activated!"
       # redirect_to user
+    elsif user && !user.activated?
+      render json: {message: "account is already active"}
     else
       render json: {message: "Invalid activation link"}
       # flash[:danger] = "Invalid activation link"

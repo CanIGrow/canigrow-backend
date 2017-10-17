@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users, param: :username, only: [:show, :create, :index, :show, :update, :destroy] do
       collection do
         post :login
+        post :activation
       end
     end
     resources :plots, only: [:create, :show, :update, :destroy] do

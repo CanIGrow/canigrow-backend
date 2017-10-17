@@ -50,6 +50,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # def activation
+  #   #user submits email address to get another account activation email
+  #   @user = User.find_by(email: params[:email])
+  #   if !@user
+  #     render json: {message: "An account for that email does not exist."}
+  #   elsif @user && !@user.activated?
+  #     @user.create_activation_digest
+  #     @user.send_activation_email
+  #   else
+  #     render json: {message: "Your account has already been activated."}
+  #   end
+  # end
+
   private
 
   def user_params

@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_password
 
-  attr_accessor :activation_token, :reset_token
+  attr_accessor :activation_token, :reset_token, :username
 
   before_validation :downcase_email
   before_validation :downcase_username
@@ -56,6 +56,11 @@ class User < ApplicationRecord
     self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def recreate_activation_digest
+    self.activation_token = User.new_token
+    update_attribute(:activation_digest,  User.digest(activation_token))
   end
 
   # Sends password reset email.

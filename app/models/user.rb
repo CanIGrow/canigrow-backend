@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_password
 
-  attr_accessor :activation_token, :reset_token, :username
+  attr_accessor :activation_token, :reset_token
 
   before_validation :downcase_email
   before_validation :downcase_username

@@ -15,6 +15,11 @@
 #
 
 class User < ApplicationRecord
+  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: "/images/:style/missing.png"
+  validates_attachment :avatar, presence: true,
+  content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
+  size: { in: 0..5.megabytes }
+
   has_many :plots, dependent: :destroy
   has_many :plants, through: :plots
   has_many :comments, dependent: :destroy

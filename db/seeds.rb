@@ -21,12 +21,12 @@
 
 require 'csv'
 
-# CSV.foreach('lib/landscapeplants_streamlined.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
-#   Plant.create!(row.to_hash)
-# end
+CSV.foreach('lib/20171017_additional_plants.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
+  Plant.create!(row.to_hash)
+end
 
 # CSV.foreach('lib/users_short.csv', :headers => true, encoding: 'iso-8859-1:utf-8') do |row|
 #   @user = User.create!(row.to_hash)
 #   # uncomment db_seed method in User model to set to activated.
 # end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

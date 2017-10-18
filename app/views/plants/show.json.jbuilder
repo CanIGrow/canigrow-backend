@@ -14,6 +14,13 @@ json.plant do
   json.zone @plant.zone
   json.soil @plant.soil
   json.notes @plant.notes
+  json.cultivar_group @plant.cultivar_group
+  json.vitamins @plant.vitamins
+  json.maturity @plant.maturity
+  json.spring_start_relative_last_frost @plant.spring_start_relative_last_frost
+  json.transplant_spring_start_relative_last_frost @plant.transplant_spring_start_relative_last_frost
+  json.fall_start_relative_first_frost @plant.fall_start_relative_first_frost
+  json.transplant_fall_relative_first_frost @plant.transplant_fall_relative_first_frost
   json.comments @plant.comments do |comment|
   json.user comment.user.username
   json.user_href user_url(comment.user)

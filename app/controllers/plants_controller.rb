@@ -34,7 +34,7 @@ class PlantsController < ApiController
 
   private
     def plant_params
-      params.require(:plant).permit(:umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes)
+      params.require(:plant).permit(:umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes, :cultivar_group, :vitamins, :maturity, :spring_start_relative_last_frost, :transplant_spring_start_relative_last_frost, :fall_start_relative_first_frost, :transplant_fall_relative_first_frost)
     end
 
     def plot_params

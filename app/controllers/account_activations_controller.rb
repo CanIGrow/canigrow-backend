@@ -1,4 +1,4 @@
-class AccountActivationsController < ApplicationController
+class AccountActivationsController < ApiController
   def create
     #user submits email address to get another account activation email
     @user = User.find_by(email: params[:email])

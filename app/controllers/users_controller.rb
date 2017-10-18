@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApiController
  before_action :get_user, only: [:update, :destroy]
  before_action :authenticate, only: [:update, :destroy]
  before_action :current_user, only: [:update, :destroy]

@@ -15,10 +15,34 @@
 #
 
 class User < ApplicationRecord
-  has_attached_file :avatar, styles: {medium: "300x300>", thumb: "100x100>"}, default_url: "/images/:style/missing.png"
-  validates_attachment :avatar,
-  content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
-  size: { in: 0..5.megabytes }
+  has_many :plots, dependent: :destroy
+  has_many :plants, through: :plots
+  has_many :comments, dependent: :destroy
+  has_secure_token :api_token
+  has_secure_password
+
+  #Paperclip for User profile pictures
+  has_attached_file :avatar,
+    styles: {
+      medium: "300x300>",
+      thumb: "100x100>"},
+    convert_options: {
+      original: '-quality 90',
+      thumb: '-quality 70 -strip'},
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV.fetch('S3_BUCKET_NAME'),
+      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+      s3_region: ENV.fetch('AWS_REGION')},
+    s3_protocol: 'https',
+    default_url: '/images/:style/missing.png',
+    url: '/system/:hash.:extension',
+    hash_secret: ENV.fetch('HASH_SECRET')
+
+    validates_attachment :avatar,
+      content_type: { content_type: /\Aimage\/.*\z/ },
+      size: { less_than: 5.megabyte }
 
   has_many :plots, dependent: :destroy
   has_many :plants, through: :plots

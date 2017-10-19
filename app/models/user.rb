@@ -31,14 +31,15 @@ class User < ApplicationRecord
       thumb: '-quality 70 -strip'},
     storage: :s3,
     s3_credentials: {
-      bucket: ENV.fetch('S3_BUCKET_NAME'),
-      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-      s3_region: ENV.fetch('AWS_REGION')},
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+      s3_region: ENV['AWS_REGION'],
+      S3_host_name: ENV['S3_HOST_NAME']},
     s3_protocol: 'https',
     default_url: '/images/:style/missing.png',
     url: '/system/:hash.:extension',
-    hash_secret: ENV.fetch('HASH_SECRET')
+    hash_secret: ENV['HASH_SECRET']
 
     validates_attachment :avatar,
       content_type: { content_type: /\Aimage\/.*\z/ },

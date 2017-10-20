@@ -46,7 +46,6 @@ class User < ApplicationRecord
       size: { less_than: 5.megabyte }
 
   has_many :plots, dependent: :destroy
-  has_many :plants, through: :plots
   has_many :comments, dependent: :destroy
   has_secure_token :api_token
   has_secure_password

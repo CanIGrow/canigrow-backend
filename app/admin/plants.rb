@@ -1,4 +1,5 @@
 ActiveAdmin.register Plant do
+  permit_params :umn_plantID, :common_name, :scientific_name, :height, :spread, :form, :seasonal_interest, :seasonal_interest_specific, :flower_color, :landscape_use, :light, :zone, :soil, :notes, :cultivar_group, :vitamins, :maturity, :spring_start_relative_last_frost, :transplant_spring_start_relative_last_frost, :fall_start_relative_first_frost, :transplant_fall_relative_first_frost
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

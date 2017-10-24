@@ -12,4 +12,24 @@ ActiveAdmin.register Plot do
 #   permitted
 # end
 
+
+  show do
+    attributes_table do
+      row :title
+      row :user do |plot|
+        plot.user.username
+      end
+      row :plant do |plot|
+        plot.plants do |plant|
+          plant.scientific_name
+        end
+      end
+      # row :image do |ad|
+      #   image_tag ad.image.url
+      # end
+    end
+    active_admin_comments
+  end
+
+
 end

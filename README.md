@@ -8,11 +8,11 @@ Github Organization: https://github.com/CanIGrow
 
 Collaborators:
 
-Kevin Harrison: https://github.com/kharrison7
-
 Jocelyn Triplett: https://github.com/JocelynTriplett
 
 Jonathan 'JT' Canfield: https://github.com/jtcanfield
+
+Kevin Harrison: https://github.com/kharrison7
 
 ---
 
